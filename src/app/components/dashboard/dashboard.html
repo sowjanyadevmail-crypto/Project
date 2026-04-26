@@ -1,0 +1,179 @@
+<div class="dashboard-container">
+  <h1 style="margin-bottom: 30px;">Dashboard Overview</h1>
+
+  <!-- Loading state -->
+  <div *ngIf="!metrics" style="text-align: center; padding: 60px; color: var(--text-secondary);">
+    <p style="font-size: 1.1rem;">Loading dashboard data</p>
+  </div>
+
+  <ng-container *ngIf="metrics">
+
+    <!-- ── Analytics Summary Row ─────────────────────────────────── -->
+    <div class="analytics-row">
+      <div class="glass-card analytic-card">
+        <div class="analytic-icon">🎓</div>
+        <div class="analytic-value">{{analytics.totalStudents}}</div>
+        <div class="analytic-label">Total Students</div>
+      </div>
+      <div class="glass-card analytic-card">
+        <div class="analytic-icon">🏆</div>
+        <div class="analytic-value">{{analytics.totalAwards}}</div>
+        <div class="analytic-label">Total Awards</div>
+      </div>
+      <div class="glass-card analytic-card">
+        <div class="analytic-icon">💰</div>
+        <div class="analytic-value">{{analytics.totalDisbursed | currency:'USD':'symbol':'1.0-0'}}</div>
+        <div class="analytic-label">Total Disbursed</div>
+      </div>
+      <div class="glass-card analytic-card">
+        <div class="analytic-icon">📊</div>
+        <div class="analytic-value">{{analytics.avgAward | currency:'USD':'symbol':'1.0-0'}}</div>
+        <div class="analytic-label">Avg Award</div>
+      </div>
+    </div>
+
+    <!-- ── Fund Summary Cards ─────────────────────────────────────── -->
+    <div class="summary-cards" style="margin-top: 30px;">
+      <!-- Klarman Summary -->
+      <div class="glass-card summary-card klarman-card">
+        <div class="card-header">
+          <h3>Klarman Funds</h3>
+          <span class="badge">Total: {{metrics.Klarman.total | currency}}</span>
+        </div>
+        <div class="stats-row">
+          <div class="stat">
+            <span class="label">Used</span>
+            <span class="value used">{{metrics.Klarman.used | currency}}</span>
+          </div>
+          <div class="stat">
+            <span class="label">Remaining</span>
+            <span class="value remaining">{{metrics.Klarman.remaining | currency}}</span>
+          </div>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" [style.width.%]="metrics.Klarman.total > 0 ? (metrics.Klarman.used / metrics.Klarman.total) * 100 : 0" style="background: var(--accent-gradient)"></div>
+        </div>
+      </div>
+
+      <!-- MGB Summary -->
+      <div class="glass-card summary-card mgb-card">
+        <div class="card-header">
+          <h3>MGB Funds</h3>
+          <span class="badge">Total: {{metrics.MGB.total | currency}}</span>
+        </div>
+        <div class="stats-row">
+          <div class="stat">
+            <span class="label">Used</span>
+            <span class="value used">{{metrics.MGB.used | currency}}</span>
+          </div>
+          <div class="stat">
+            <span class="label">Remaining</span>
+            <span class="value remaining">{{metrics.MGB.remaining | currency}}</span>
+          </div>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" [style.width.%]="metrics.MGB.total > 0 ? (metrics.MGB.used / metrics.MGB.total) * 100 : 0" style="background: linear-gradient(135deg, #10b981, #3b82f6)"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Demographics Analytics ─────────────────────────────────── -->
+    <h2 style="margin: 40px 0 20px 0; font-size: 1.2rem; color: var(--text-secondary);">Demographics Analytics (Live from Firebase)</h2>
+    <div class="analytics-row">
+
+      <!-- Gender Breakdown -->
+      <div class="glass-card breakdown-card">
+        <h4 style="margin-bottom: 16px;">Gender Breakdown</h4>
+        <div *ngFor="let key of objectKeys(analytics.genderBreakdown)" class="breakdown-row">
+          <span class="breakdown-label">{{key}}</span>
+          <div class="mini-progress-wrap">
+            <div class="mini-progress-bar" [style.width.%]="(analytics.genderBreakdown[key] / analytics.totalStudents) * 100"></div>
+          </div>
+          <span class="breakdown-count">{{analytics.genderBreakdown[key]}}</span>
+        </div>
+        <p *ngIf="objectKeys(analytics.genderBreakdown).length === 0" style="color: var(--text-secondary); font-size: 0.85rem;">No data yet.</p>
+      </div>
+
+      <!-- Race Breakdown -->
+      <div class="glass-card breakdown-card">
+        <h4 style="margin-bottom: 16px;">Race / Ethnicity</h4>
+        <div *ngFor="let key of objectKeys(analytics.raceBreakdown)" class="breakdown-row">
+          <span class="breakdown-label">{{key}}</span>
+          <div class="mini-progress-wrap">
+            <div class="mini-progress-bar" [style.width.%]="(analytics.raceBreakdown[key] / analytics.totalStudents) * 100" style="background: linear-gradient(90deg, #10b981, #3b82f6)"></div>
+          </div>
+          <span class="breakdown-count">{{analytics.raceBreakdown[key]}}</span>
+        </div>
+        <p *ngIf="objectKeys(analytics.raceBreakdown).length === 0" style="color: var(--text-secondary); font-size: 0.85rem;">No data yet.</p>
+      </div>
+
+      <!-- Program Breakdown -->
+      <div class="glass-card breakdown-card">
+        <h4 style="margin-bottom: 16px;">Program Type</h4>
+        <div *ngFor="let key of objectKeys(analytics.programBreakdown)" class="breakdown-row">
+          <span class="breakdown-label">{{key}}</span>
+          <div class="mini-progress-wrap">
+            <div class="mini-progress-bar" [style.width.%]="(analytics.programBreakdown[key] / analytics.totalStudents) * 100" style="background: linear-gradient(90deg, #f59e0b, #ef4444)"></div>
+          </div>
+          <span class="breakdown-count">{{analytics.programBreakdown[key]}}</span>
+        </div>
+        <p *ngIf="objectKeys(analytics.programBreakdown).length === 0" style="color: var(--text-secondary); font-size: 0.85rem;">No data yet.</p>
+      </div>
+    </div>
+
+    <!-- ── Fund Breakdown ─────────────────────────────────────────── -->
+    <h2 style="margin: 40px 0 20px 0; font-size: 1.2rem; color: var(--text-secondary);">Fund Breakdown</h2>
+    <div class="fund-grid">
+      <div *ngFor="let fund of metrics.fundDetails" class="glass-card fund-detail-card">
+        <div class="fund-header">
+          <span class="parent-tag" [class.klarman]="fund.parentFund === 'Klarman'" [class.mgb]="fund.parentFund === 'MGB'">{{fund.parentFund}}</span>
+        </div>
+        <h4>{{fund.name}}</h4>
+        <div class="fund-metrics">
+          <div class="metric">
+            <span class="label">Allocated</span>
+            <span class="val">{{fund.totalBudgetAllocated | currency:'USD':'symbol':'1.0-0'}}</span>
+          </div>
+          <div class="metric">
+            <span class="label" style="color: var(--success)">Remaining</span>
+            <span class="val">{{fund.remaining | currency:'USD':'symbol':'1.0-0'}}</span>
+          </div>
+        </div>
+        <div class="progress-bar-container mini">
+          <div class="progress-bar" [style.width.%]="fund.percentage" [style.background]="fund.percentage > 90 ? 'var(--danger)' : 'var(--accent-primary)'"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Recent Awards ──────────────────────────────────────────── -->
+    <h2 style="margin: 40px 0 20px 0; font-size: 1.2rem; color: var(--text-secondary);">Recent Awards</h2>
+    <div class="glass-card table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>BSU ID</th>
+            <th>Program</th>
+            <th>Fund Category</th>
+            <th>Date Awarded</th>
+            <th style="text-align: right;">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let award of recentAwards">
+            <td>{{award.student?.firstName}} {{award.student?.lastName}}</td>
+            <td>{{award.student?.bsuId}}</td>
+            <td><span class="badge sm">{{award.student?.programType}}</span></td>
+            <td>{{award.fundName}}</td>
+            <td>{{award.dateAwarded | date:'mediumDate'}}</td>
+            <td style="text-align: right; font-weight: 600; color: var(--success);">{{award.amountAwarded | currency}}</td>
+          </tr>
+          <tr *ngIf="recentAwards.length === 0">
+            <td colspan="6" style="text-align: center; padding: 30px; color: var(--text-secondary);">No awards granted yet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </ng-container>
+</div>

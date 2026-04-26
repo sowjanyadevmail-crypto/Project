@@ -1,0 +1,36 @@
+mutation SubmitApplication(
+  $studentId: UUID!,
+  $scholarshipId: UUID!,
+  $applicationDate: Date!,
+  $essay: String!,
+  $transcriptUrl: String!
+)
+@auth(level: USER, insecureReason: "This operation is safe to expose to all logged in users.") {
+  application_insert(
+    data: {
+      studentId: $studentId
+      scholarshipId: $scholarshipId
+      applicationDate: $applicationDate
+      essay: $essay
+      transcriptUrl: $transcriptUrl
+      status: "Pending"
+    }
+  )
+}
+
+mutation AwardScholarship(
+  $awardId: UUID!,
+  $amount: Float!,
+  $awardDate: Date!,
+  $notes: String
+)
+@auth(level: USER, insecureReason: "This operation is safe to expose to all logged in users.") {
+  award_update(
+    id: $awardId
+    data: {
+      amountAwarded: $amount
+      awardDate: $awardDate
+      notes: $notes
+    }
+  )
+}

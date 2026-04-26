@@ -1,0 +1,29 @@
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-group.half {
+  flex: 1;
+}
+
+.form-group.third {
+  flex: 1;
+}
+
+/* Validation styles */
+.form-control.ng-invalid.ng-touched {
+  border-color: var(--danger);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}

@@ -1,0 +1,46 @@
+type User @table {
+  username: String!
+  passwordHash: String!
+  role: String!
+  email: String
+  fullName: String
+}
+
+type Scholarship @table {
+  title: String!
+  description: String!
+  applicationDeadline: Date!
+  amount: Float!
+  eligibilityCriteria: String!
+  fundingSource: String
+  numberOfAwards: Int
+}
+
+type Student @table {
+  studentId: String!
+  firstName: String!
+  lastName: String!
+  email: String!
+  major: String
+  gpa: Float
+  academicYear: String
+}
+
+type Application @table {
+  student: Student!
+  scholarship: Scholarship!
+  applicationDate: Date!
+  status: String!
+  essay: String
+  transcriptUrl: String
+  recommendationLetterUrls: [String]
+}
+
+type Award @table {
+  student: Student!
+  scholarship: Scholarship!
+  application: Application!
+  awardDate: Date!
+  amountAwarded: Float!
+  notes: String
+}

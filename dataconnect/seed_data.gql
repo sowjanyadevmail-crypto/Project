@@ -1,0 +1,96 @@
+mutation CreateDemoData @transaction @auth(level: USER, insecureReason: "Seed data is for development purposes and not directly exposed to end-users.") {
+  user_insertMany(data: [
+    {
+      id: "b2d2e1b0-4f81-4b10-8b1b-9f6c7a3d2e10",
+      username: "student_user",
+      email: "student@example.com",
+      passwordHash: "hashedpassword1",
+      role: "student",
+      fullName: "Student One"
+    },
+    {
+      id: "a1c1d1e1-2f3f-4a5a-6b7b-8c9d0e1f2a3c",
+      username: "admin_user",
+      email: "admin@example.com",
+      passwordHash: "hashedpassword2",
+      role: "admin",
+      fullName: "Admin User"
+    }
+  ])
+  student_insertMany(data: [
+    {
+      id: "c3d3e3f3-4a5a-6b7b-8c8c-9d9d0e0f1a1b",
+      studentId: "S001",
+      firstName: "Alice",
+      lastName: "Smith",
+      email: "alice.smith@example.com",
+      major: "Computer Science",
+      gpa: 3.8,
+      academicYear: "Senior"
+    },
+    {
+      id: "d4e4f4g4-5b6b-7c8c-9d9d-0e0e1f1f2a2b",
+      studentId: "S002",
+      firstName: "Bob",
+      lastName: "Johnson",
+      email: "bob.johnson@example.com",
+      major: "Mechanical Engineering",
+      gpa: 3.5,
+      academicYear: "Junior"
+    }
+  ])
+  scholarship_insertMany(data: [
+    {
+      id: "e5f5g5h5-6c7c-8d8d-9e9e-0f0f1a1a2b2c",
+      title: "Tech Innovators Scholarship",
+      description: "Scholarship for students pursuing careers in technology innovation.",
+      applicationDeadline: "2024-10-15",
+      amount: 5000.00,
+      eligibilityCriteria: "GPA 3.5+, CS/EE major",
+      fundingSource: "Innovate Corp",
+      numberOfAwards: 5
+    },
+    {
+      id: "f6g6h6i6-7d8d-9e9e-0f0f-1a1a2b2b3c3d",
+      title: "Community Service Award",
+      description: "Recognizing students with outstanding community service.",
+      applicationDeadline: "2024-11-01",
+      amount: 2000.00,
+      eligibilityCriteria: "100+ hours of community service",
+      fundingSource: "Local Philanthropist",
+      numberOfAwards: 10
+    }
+  ])
+  application_insertMany(data: [
+    {
+      id: "g7h7i7j7-8e9e-0f0f-1a1a-2b2b3c3c4d4e",
+      studentId: "c3d3e3f3-4a5a-6b7b-8c8c-9d9d0e0f1a1b",
+      scholarshipId: "e5f5g5h5-6c7c-8d8d-9e9e-0f0f1a1a2b2c",
+      applicationDate: "2024-09-20",
+      status: "Submitted",
+      essay: "My passion for technology...",
+      transcriptUrl: "https://example.com/alice_transcript.pdf",
+      recommendationLetterUrls: ["https://example.com/rec1.pdf", "https://example.com/rec2.pdf"]
+    },
+    {
+      id: "h8i8j8k8-9f0f-1a1a-2b2b-3c3c4d4d5e5f",
+      studentId: "d4e4f4g4-5b6b-7c8c-9d9d-0e0e1f1f2a2b",
+      scholarshipId: "f6g6h6i6-7d8d-9e9e-0f0f-1a1a2b2b3c3d",
+      applicationDate: "2024-09-25",
+      status: "In Review",
+      essay: "My dedication to community...",
+      transcriptUrl: "https://example.com/bob_transcript.pdf"
+    }
+  ])
+  award_insertMany(data: [
+    {
+      id: "i9j9k9l9-0g0g-1b1b-2c2c-3d3d4e4e5f5g",
+      studentId: "c3d3e3f3-4a5a-6b7b-8c8c-9d9d0e0f1a1b",
+      scholarshipId: "e5f5g5h5-6c7c-8d8d-9e9e-0f0f1a1a2b2c",
+      applicationId: "g7h7i7j7-8e9e-0f0f-1a1a-2b2b3c3c4d4e",
+      awardDate: "2024-12-01",
+      amountAwarded: 4500.00,
+      notes: "Partial scholarship due to competitive pool."
+    }
+  ])
+}
