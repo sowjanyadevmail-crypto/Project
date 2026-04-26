@@ -56,3 +56,71 @@
   color: var(--danger);
   border-color: var(--danger);
 }
+/* ────── Mobile Responsive Styles ────── */
+@media (max-width: 768px) {
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+  }
+
+  .data-table {
+    min-width: 100%;
+    font-size: 0.85rem;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 12px 12px;
+    font-size: 0.8rem;
+  }
+
+  .data-table th {
+    font-size: 0.75rem;
+  }
+
+  .badge {
+    padding: 3px 6px;
+    font-size: 0.65rem;
+  }
+
+  .action-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+  }
+
+  .data-table {
+    min-width: 100%;
+    font-size: 0.75rem;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 10px 8px;
+    font-size: 0.7rem;
+  }
+
+  .data-table th {
+    font-size: 0.65rem;
+  }
+
+  .badge {
+    padding: 2px 4px;
+    font-size: 0.6rem;
+  }
+
+  .action-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 0.7rem;
+  }
+}

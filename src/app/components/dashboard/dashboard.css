@@ -228,3 +228,208 @@
   width: 24px;
   text-align: right;
 }
+/* ────── Mobile Responsive Styles ────── */
+@media (max-width: 1024px) {
+  .summary-cards {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .fund-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .analytics-row {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .summary-cards {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    gap: 12px;
+  }
+
+  .fund-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .analytics-row {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+  }
+
+  .analytic-card {
+    padding: 20px 16px;
+  }
+
+  .analytic-value {
+    font-size: 1.4rem;
+  }
+
+  .analytic-label {
+    font-size: 0.75rem;
+  }
+
+  .analytic-icon {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .card-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .stats-row {
+    justify-content: space-around;
+    gap: 12px;
+  }
+
+  .stat {
+    flex: 1;
+  }
+
+  .stat .value {
+    font-size: 1.3rem;
+  }
+
+  .stat .label {
+    font-size: 0.8rem;
+  }
+
+  .breakdown-card {
+    min-width: auto;
+  }
+
+  .breakdown-row {
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .breakdown-label {
+    width: 70px;
+    font-size: 0.75rem;
+  }
+
+  .breakdown-count {
+    font-size: 0.75rem;
+    width: 20px;
+  }
+
+  .fund-detail-card h4 {
+    font-size: 0.95rem;
+    height: auto;
+    margin-bottom: 12px;
+  }
+
+  .parent-tag {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+  }
+
+  .fund-metrics {
+    gap: 8px;
+  }
+
+  .metric .label {
+    font-size: 0.65rem;
+  }
+
+  .metric .val {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .summary-cards {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .fund-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .analytics-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .analytic-card {
+    padding: 16px 12px;
+  }
+
+  .analytic-value {
+    font-size: 1.1rem;
+  }
+
+  .analytic-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3px;
+  }
+
+  .analytic-icon {
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+  }
+
+  .card-header h3 {
+    font-size: 1rem;
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
+
+  .stats-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .stat {
+    width: 100%;
+  }
+
+  .stat .value {
+    font-size: 1.1rem;
+  }
+
+  .stat .label {
+    font-size: 0.7rem;
+  }
+
+  .breakdown-row {
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .breakdown-label {
+    width: 60px;
+    font-size: 0.65rem;
+  }
+
+  .breakdown-count {
+    font-size: 0.65rem;
+    width: 18px;
+  }
+
+  .fund-detail-card h4 {
+    font-size: 0.9rem;
+  }
+
+  .parent-tag {
+    font-size: 0.6rem;
+    padding: 2px 4px;
+  }
+}
