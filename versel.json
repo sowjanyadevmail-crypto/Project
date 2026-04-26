@@ -1,0 +1,9 @@
+{
+    "outputDirectory":"dist/student-funds-app/browser",
+    "rewrites":[
+        {
+            "source":"/(.*)",
+            "destination":"/index.html"
+        }
+    ]
+}
