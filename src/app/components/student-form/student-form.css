@@ -16,6 +16,41 @@
   flex: 1;
 }
 
+.form-container {
+  width: 100%;
+  padding: 0 16px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.form-group.half,
+.form-group.third {
+  min-width: 0;
+}
+
+@media (max-width: 720px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-group.half,
+  .form-group.third {
+    width: 100%;
+  }
+
+  .form-actions {
+    justify-content: center !important;
+  }
+
+  .glass-card {
+    padding: 24px;
+  }
+}
+
 /* Validation styles */
 .form-control.ng-invalid.ng-touched {
   border-color: var(--danger);
