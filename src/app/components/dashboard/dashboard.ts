@@ -17,7 +17,7 @@ export class Dashboard implements OnInit, OnDestroy {
   private sub!: Subscription;
 
   loading = true;
-  metrics: any = null;
+  metrics: any = { Klarman: { used: 0 }, MGB: { used: 0 }, fundDetails: [] };
   recentAwards: any[] = [];
 
   analytics = {
@@ -31,6 +31,7 @@ export class Dashboard implements OnInit, OnDestroy {
   };
 
   ngOnInit(): void {
+    this.loading = true;
     this.sub = combineLatest([
       this.dataService.getAwards().pipe(startWith([])),
       this.dataService.getStudents().pipe(startWith([])),
@@ -42,27 +43,19 @@ export class Dashboard implements OnInit, OnDestroy {
             .filter((a: any) => a.fundCategoryId === f.id)
             .reduce((sum: number, a: any) => sum + Number(a.amountAwarded || 0), 0);
 
-          const total = Number(f.totalBudgetAllocated || 0);
-
           return {
             ...f,
-            used,
-            remaining: total - used,
-            percentage: Math.min(total > 0 ? (used / total) * 100 : 0, 100)
+            used
           };
         });
 
-        const Klarman = { total: 0, used: 0, remaining: 0 };
-        const MGB = { total: 0, used: 0, remaining: 0 };
+        const Klarman = { used: 0 };
+        const MGB = { used: 0 };
 
         fundDetails.forEach((f: any) => {
           const target = f.parentFund === 'Klarman' ? Klarman : MGB;
-          target.total += Number(f.totalBudgetAllocated || 0);
           target.used += Number(f.used || 0);
         });
-
-        Klarman.remaining = Klarman.total - Klarman.used;
-        MGB.remaining = MGB.total - MGB.used;
 
         this.metrics = { Klarman, MGB, fundDetails };
 
@@ -99,11 +92,13 @@ export class Dashboard implements OnInit, OnDestroy {
           .map((award: any) => {
             const student = students.find((s: any) => s.id === award.studentId);
             const fund = fundDetails.find((f: any) => f.id === award.fundCategoryId);
+            const yearAwarded = award.dateAwarded ? new Date(award.dateAwarded).getFullYear() : 'N/A';
 
             return {
               ...award,
               student,
-              fundName: fund?.name || 'Unknown'
+              fundName: fund?.name || 'Unknown',
+              yearAwarded
             };
           });
 

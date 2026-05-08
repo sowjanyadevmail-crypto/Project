@@ -2,11 +2,11 @@
   <h1 style="margin-bottom: 30px;">Dashboard Overview</h1>
 
   <!-- Loading state -->
-  <div *ngIf="!metrics" style="text-align: center; padding: 60px; color: var(--text-secondary);">
+  <div *ngIf="loading" style="text-align: center; padding: 60px; color: var(--text-secondary);">
     <p style="font-size: 1.1rem;">Loading dashboard data</p>
   </div>
 
-  <ng-container *ngIf="metrics">
+  <ng-container *ngIf="!loading">
 
     <!-- ── Analytics Summary Row ─────────────────────────────────── -->
     <div class="analytics-row">
@@ -38,20 +38,12 @@
       <div class="glass-card summary-card klarman-card">
         <div class="card-header">
           <h3>Klarman Funds</h3>
-          <span class="badge">Total: {{metrics.Klarman.total | currency}}</span>
         </div>
         <div class="stats-row">
           <div class="stat">
-            <span class="label">Used</span>
+            <span class="label">Spent</span>
             <span class="value used">{{metrics.Klarman.used | currency}}</span>
           </div>
-          <div class="stat">
-            <span class="label">Remaining</span>
-            <span class="value remaining">{{metrics.Klarman.remaining | currency}}</span>
-          </div>
-        </div>
-        <div class="progress-bar-container">
-          <div class="progress-bar" [style.width.%]="metrics.Klarman.total > 0 ? (metrics.Klarman.used / metrics.Klarman.total) * 100 : 0" style="background: var(--accent-gradient)"></div>
         </div>
       </div>
 
@@ -59,20 +51,12 @@
       <div class="glass-card summary-card mgb-card">
         <div class="card-header">
           <h3>MGB Funds</h3>
-          <span class="badge">Total: {{metrics.MGB.total | currency}}</span>
         </div>
         <div class="stats-row">
           <div class="stat">
-            <span class="label">Used</span>
+            <span class="label">Spent</span>
             <span class="value used">{{metrics.MGB.used | currency}}</span>
           </div>
-          <div class="stat">
-            <span class="label">Remaining</span>
-            <span class="value remaining">{{metrics.MGB.remaining | currency}}</span>
-          </div>
-        </div>
-        <div class="progress-bar-container">
-          <div class="progress-bar" [style.width.%]="metrics.MGB.total > 0 ? (metrics.MGB.used / metrics.MGB.total) * 100 : 0" style="background: linear-gradient(135deg, #10b981, #3b82f6)"></div>
         </div>
       </div>
     </div>
@@ -131,16 +115,9 @@
         <h4>{{fund.name}}</h4>
         <div class="fund-metrics">
           <div class="metric">
-            <span class="label">Allocated</span>
-            <span class="val">{{fund.totalBudgetAllocated | currency:'USD':'symbol':'1.0-0'}}</span>
+            <span class="label" style="color: var(--success)">Spent</span>
+            <span class="val">{{fund.used | currency:'USD':'symbol':'1.0-0'}}</span>
           </div>
-          <div class="metric">
-            <span class="label" style="color: var(--success)">Remaining</span>
-            <span class="val">{{fund.remaining | currency:'USD':'symbol':'1.0-0'}}</span>
-          </div>
-        </div>
-        <div class="progress-bar-container mini">
-          <div class="progress-bar" [style.width.%]="fund.percentage" [style.background]="fund.percentage > 90 ? 'var(--danger)' : 'var(--accent-primary)'"></div>
         </div>
       </div>
     </div>
@@ -156,6 +133,7 @@
             <th>Program</th>
             <th>Fund Category</th>
             <th>Date Awarded</th>
+            <th>Year Awarded</th>
             <th style="text-align: right;">Amount</th>
           </tr>
         </thead>
@@ -166,10 +144,11 @@
             <td><span class="badge sm">{{award.student?.programType}}</span></td>
             <td>{{award.fundName}}</td>
             <td>{{award.dateAwarded | date:'mediumDate'}}</td>
+            <td>{{award.yearAwarded}}</td>
             <td style="text-align: right; font-weight: 600; color: var(--success);">{{award.amountAwarded | currency}}</td>
           </tr>
           <tr *ngIf="recentAwards.length === 0">
-            <td colspan="6" style="text-align: center; padding: 30px; color: var(--text-secondary);">No awards granted yet.</td>
+            <td colspan="7" style="text-align: center; padding: 30px; color: var(--text-secondary);">No awards granted yet.</td>
           </tr>
         </tbody>
       </table>

@@ -34,11 +34,13 @@ export class StudentList implements OnInit, OnDestroy {
         this.awardsWithStudents = awards.map((award: any) => {
           const student = students.find((s: any) => s.id === award.studentId);
           const fund = funds.find((f: any) => f.id === award.fundCategoryId);
+          const yearAwarded = award.dateAwarded ? new Date(award.dateAwarded).getFullYear() : 'N/A';
 
           return {
             ...award,
             student,
-            fundName: fund?.name || 'Unknown'
+            fundName: fund?.name || 'Unknown',
+            yearAwarded
           };
         });
 
