@@ -169,6 +169,7 @@ select.form-control option {
 .gap-3 { gap: 16px; }
 .gap-4 { gap: 24px; }
 .w-100 { width: 100%; }
+<<<<<<< HEAD
 /* ────── Mobile Responsive Styles ────── */
 @media (max-width: 768px) {
   body {
@@ -235,3 +236,69 @@ select.form-control option {
     font-size: 0.9rem;
   }
 }
+=======
+
+/* --- Responsive enhancements --- */
+@media (max-width: 900px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .glass-card {
+    padding: 20px;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .form-control,
+  .data-table th,
+  .data-table td {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    background-position: center top;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  .glass-card {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .form-control {
+    padding: 14px 16px;
+  }
+
+  .btn {
+    font-size: 0.95rem;
+    padding: 14px 16px;
+  }
+
+  .badge {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+
+  .container,
+  .glass-card,
+  .dashboard-container,
+  .directory-container,
+  .form-container {
+    width: 100%;
+  }
+}
+>>>>>>> 537295634c1d51e93261aef55e63dca1ce9316e2
